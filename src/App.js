@@ -11,17 +11,6 @@ class App extends Component {
     loading: false
   };
 
-  // searchUsers = async text => {
-  //   let data;
-  //   await fetch(
-  //     `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-  //   )
-  //     .then(response => response.json())
-  //     .then(jsonThing => (data = jsonThing));
-
-  //   this.setState({ users: data, loading: false });
-  // };
-
   // * Search github users
   searchUsers = async text => {
     this.setState({ loading: true });
@@ -34,12 +23,19 @@ class App extends Component {
     console.log(this.state.users);
   };
 
+  // * Clear github users
+  clearUsers = () => this.setState({ users: [], loading: false });
+
   render() {
     return (
       <div className='App'>
         <Navbar title='GitHub Finder' />
         <div className='container'>
-          <Search searchUsers={this.searchUsers} />
+          <Search
+            searchUsers={this.searchUsers}
+            clearUsers={this.clearUsers}
+            showClear={this.state.users.length > 0 ? true : false}
+          />
           <Users loading={this.state.loading} users={this.state.users} />
         </div>
       </div>
