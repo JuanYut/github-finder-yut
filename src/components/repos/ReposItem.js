@@ -5,7 +5,9 @@ const ReposItem = ({ repo }) => {
   return (
     <div className='card'>
       <h3>
-        <a href={repo.html_url}>{repo.name}</a>
+        <a href={repo.html_url} style={{ color: '#2196f3' }}>
+          {repo.name}
+        </a>
       </h3>
     </div>
   );
